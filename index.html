@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sound Alert with MP3</title>
+</head>
+<body>
+
+<h2>Enter a Notification</h2>
+<input type="text" id="notificationInput" placeholder="Type something here...">
+
+<script>
+    const audio = new Audio('assets/sounds/name1.wav');
+
+    const inputField = document.getElementById('notificationInput');
+    let hasPlayedSound = false;
+
+    inputField.addEventListener('keyup', function() {
+        if (inputField.value !== '' && !hasPlayedSound) {
+            audio.play();
+            hasPlayedSound = true;
+        }
+    });
+
+    inputField.addEventListener('keyup', function() {
+        if (inputField.value === '') {
+            hasPlayedSound = false;
+        }
+    });
+
+    inputField.addEventListener('focus', function() {
+        hasPlayedSound = false;
+    });
+</script>
+
+</body>
+</html>
