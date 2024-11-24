@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+</head>
+<body>
+
+<h2>Notifications</h2>
+<p id="notificationDisplay">No new notifications</p>
+<button id="enableAudio">Enable Notifications</button>
+
+
+<script>
+    const audio = new Audio('assets/sounds/name1.wav');
+    const notificationDisplay = document.getElementById('notificationDisplay');
+    const enableAudioButton = document.getElementById('enableAudio');
+    let audioEnabled = false;
+
+    enableAudioButton.addEventListener('click', () => {
+        audioEnabled = true;
+        enableAudioButton.style.display = 'none';
+    });
+    const existingNotification = localStorage.getItem('notification');
+    if (existingNotification) {
+        notificationDisplay.textContent = existingNotification;
+    }
+
+    window.addEventListener('storage', function(event) {
+        if (event.key === 'notification') {
+            const notification = event.newValue;
+            notificationDisplay.textContent = notification ? notification : 'No new notifications';
+            if (notification) {
+                audio.play();
+            }
+        }
+    });
+</script>
+
+</body>
+</html>

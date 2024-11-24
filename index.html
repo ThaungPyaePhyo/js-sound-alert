@@ -3,34 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sound Alert with MP3</title>
+    <title>Index Page</title>
 </head>
 <body>
 
 <h2>Enter a Notification</h2>
 <input type="text" id="notificationInput" placeholder="Type something here...">
+<button id="addNotification">Add Notification</button>
 
 <script>
-    const audio = new Audio('assets/sounds/name1.wav');
-
     const inputField = document.getElementById('notificationInput');
-    let hasPlayedSound = false;
+    const addButton = document.getElementById('addNotification');
 
-    inputField.addEventListener('keyup', function() {
-        if (inputField.value !== '' && !hasPlayedSound) {
-            audio.play();
-            hasPlayedSound = true;
+    addButton.addEventListener('click', function() {
+        const inputValue = inputField.value.trim();
+        if (inputValue !== '') {
+            localStorage.setItem('notification', inputValue);
+            inputField.value = '';
+            alert('successfully added');
         }
-    });
-
-    inputField.addEventListener('keyup', function() {
-        if (inputField.value === '') {
-            hasPlayedSound = false;
-        }
-    });
-
-    inputField.addEventListener('focus', function() {
-        hasPlayedSound = false;
     });
 </script>
 
